@@ -3,13 +3,13 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "pause",
-  description: "Pauses the music",
+  description: "Ставит музыку на паузу",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: [],
+  aliases: ["ps"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,20 +35,20 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!**"
       );
     if (player.paused)
       return client.sendTime(
         message.channel,
-        "❌ | **Music is already paused!**"
+        "<:N_:993656004636053524>** ・ Воспроизведение уже приостановлено!**"
       );
     player.pause(true);
     let embed = new MessageEmbed()
-      .setAuthor(`Paused!`, client.botconfig.IconURL)
+      .setAuthor(`Воспроизведение приостановлено!`, client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
-      .setDescription(`Type \`${GuildDB.prefix}resume\` to continue playing!`);
+      .setDescription(`Введите \`${GuildDB.prefix}resume\` для возобновления!`);
     await message.channel.send(embed);
-    await message.react("✅");
+    await message.react("<:Ready:985608370348257300>");
   },
 
   SlashCommand: {
@@ -66,7 +66,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -74,19 +74,19 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (player.paused)
-        return client.sendTime(interaction, "Music is already paused!");
+        return client.sendTime(interaction, "**<:N_:993656004636053524> ・ Воспроизведение уже приостановлено!**");
       player.pause(true);
-      client.sendTime(interaction, "**⏸ Paused!**");
+      client.sendTime(interaction, "**<:paus:993648792677130310> ・ Воспроизведение приостановлено!**");
     },
   },
 };

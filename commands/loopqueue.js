@@ -3,7 +3,7 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "loopqueue",
-  description: "Loop the whole queue",
+  description: "Зацикливает всю очередь",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,15 +35,15 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
 
     if (player.queueRepeat) {
       player.setQueueRepeat(false);
-      client.sendTime(message.channel, `:repeat: Queue Loop \`disabled\``);
+      client.sendTime(message.channel, `<:loopequ:993649994940821598> ・ Повтор очереди: \`Выключен\``);
     } else {
       player.setQueueRepeat(true);
-      client.sendTime(message.channel, `:repeat: Queue Loop \`enabled\``);
+      client.sendTime(message.channel, `<:loopequ:993649994940821598> ・ Повтор очереди: \`Включен\``);
     }
   },
   SlashCommand: {
@@ -63,12 +63,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -76,15 +76,15 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
 
       if (player.queueRepeat) {
         player.setQueueRepeat(false);
-        client.sendTime(interaction, `:repeat: **Queue Loop** \`disabled\``);
+        client.sendTime(interaction, `<:loopequ:993649994940821598> ・ Повтор очереди: \`Выключен\``);
       } else {
         player.setQueueRepeat(true);
-        client.sendTime(interaction, `:repeat: **Queue Loop** \`enabled\``);
+        client.sendTime(interaction, `<:loopequ:993649994940821598> ・ Повтор очереди: \`Включен\``);
       }
       console.log(interaction.data);
     },

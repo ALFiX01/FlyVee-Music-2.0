@@ -4,13 +4,13 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "play",
-  description: "Play your favorite songs",
-  usage: "[song]",
+  description: "Запускает воспроизведение музыки",
+  usage: "[Песня]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["p"],
+  aliases: ["p", "start", "з", "pl"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -22,7 +22,7 @@ module.exports = {
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to play something!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -30,20 +30,20 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
     let SearchString = args.join(" ");
     if (!SearchString)
       return client.sendTime(
         message.channel,
-        `**Usage - **\`${GuildDB.prefix}play [song]\``
+        `**Использование - **\`${GuildDB.prefix}play [песня]\``
       );
     let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
-    let Searching = await message.channel.send(":mag_right: Searching...");
+    let Searching = await message.channel.send("<:search:993657899714875484>・Идет поиск...");
     if (!CheckNode || !CheckNode.connected) {
       return client.sendTime(
         message.channel,
-        "❌ | **Lavalink node not connected**"
+        "<:notconect:994370772040695808>** ・ Lavalink не подключен или устарел**"
       );
     }
     const player = client.Manager.create({
@@ -61,7 +61,7 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
 
     if (player.state != "CONNECTED") await player.connect();
@@ -84,12 +84,12 @@ module.exports = {
           )
             player.play();
           SongAddedEmbed.setAuthor(
-            `Playlist added to queue`,
+            `Плейлист добавлен в очередь воспроизведения`,
             message.author.displayAvatarURL()
           );
           SongAddedEmbed.addField(
-            "Enqueued",
-            `\`${Searched.tracks.length}\` songs`,
+            "В очереди",
+            `\`${Searched.tracks.length}\` треков`,
             false
           );
           //SongAddedEmbed.addField("Playlist duration", `\`${prettyMilliseconds(Searched.tracks, { colonNotation: true })}\``, false)
@@ -100,19 +100,19 @@ module.exports = {
           );
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor(`Added to queue`, client.botconfig.IconURL);
+          SongAddedEmbed.setAuthor(`Добавлено в очередь воспроизведения`, client.botconfig.IconURL);
           SongAddedEmbed.setDescription(
             `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
           );
           SongAddedEmbed.addField(
-            "Author",
+            "Канал",
             Searched.tracks[0].info.author,
             true
           );
           //SongAddedEmbed.addField("Duration", `\`${prettyMilliseconds(Searched.tracks[0].length, { colonNotation: true })}\``, true);
           if (player.queue.totalSize > 1)
             SongAddedEmbed.addField(
-              "Position in queue",
+              "Позиция в очереди воспроизведения",
               `${player.queue.size - 0}`,
               true
             );
@@ -120,7 +120,7 @@ module.exports = {
         } else {
           return client.sendTime(
             message.channel,
-            "**No matches found for - **" + SearchString
+            "<:N_:993656004636053524>** ・ Не найдено совпадений для - **" + SearchString
           );
         }
       } else {
@@ -128,13 +128,13 @@ module.exports = {
         if (!player)
           return client.sendTime(
             message.channel,
-            "❌ | **Nothing is playing right now...**"
+            "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
           );
 
         if (Searched.loadType === "NO_MATCHES")
           return client.sendTime(
             message.channel,
-            "**No matches found for - **" + SearchString
+            "<:N_:993656004636053524>** ・ Не найдено совпадений для - **" + SearchString
           );
         else if (Searched.loadType == "PLAYLIST_LOADED") {
           player.queue.add(Searched.tracks);
@@ -145,7 +145,7 @@ module.exports = {
           )
             player.play();
           SongAddedEmbed.setAuthor(
-            `Playlist added to queue`,
+            `Плейлист добавлен в очередь воспроизведения`,
             client.botconfig.IconURL
           );
           // SongAddedEmbed.setThumbnail(Searched.tracks[0].displayThumbnail());
@@ -153,12 +153,12 @@ module.exports = {
             `[${Searched.playlist.name}](${SearchString})`
           );
           SongAddedEmbed.addField(
-            "Enqueued",
-            `\`${Searched.tracks.length}\` songs`,
+            "В очереди воспроизведения",
+            `\`${Searched.tracks.length}\` треков`,
             false
           );
           SongAddedEmbed.addField(
-            "Playlist duration",
+            "Продолжительность плейлиста",
             `\`${prettyMilliseconds(Searched.playlist.duration, {
               colonNotation: true,
             })}\``,
@@ -169,15 +169,15 @@ module.exports = {
           player.queue.add(Searched.tracks[0]);
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor(`Added to queue`, client.botconfig.IconURL);
+          SongAddedEmbed.setAuthor(`Добавлено в очередь воспроизведения`, client.botconfig.IconURL);
 
           // SongAddedEmbed.setThumbnail(Searched.tracks[0].displayThumbnail());
           SongAddedEmbed.setDescription(
             `[${Searched.tracks[0].title}](${Searched.tracks[0].uri})`
           );
-          SongAddedEmbed.addField("Author", Searched.tracks[0].author, true);
+          SongAddedEmbed.addField("Канал", Searched.tracks[0].author, true);
           SongAddedEmbed.addField(
-            "Duration",
+            "Длительность",
             `\`${prettyMilliseconds(Searched.tracks[0].duration, {
               colonNotation: true,
             })}\``,
@@ -185,7 +185,7 @@ module.exports = {
           );
           if (player.queue.totalSize > 1)
             SongAddedEmbed.addField(
-              "Position in queue",
+              "Позиция в очереди воспроизведения",
               `${player.queue.size - 0}`,
               true
             );
@@ -196,7 +196,7 @@ module.exports = {
       console.log(e);
       return client.sendTime(
         message.channel,
-        "**No matches found for - **" + SearchString
+        "**Не найдено совпадений для - **" + SearchString
       );
     }
   },
@@ -204,11 +204,11 @@ module.exports = {
   SlashCommand: {
     options: [
       {
-        name: "song",
-        value: "song",
+        name: "track",
+        value: "track",
         type: 3,
         required: true,
-        description: "Play music in the voice channel",
+        description: "Введите название трека или URL-адрес, который хотите воспроизвести",
       },
     ],
     /**
@@ -226,7 +226,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -234,13 +234,13 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
       if (!CheckNode || !CheckNode.connected) {
         return client.sendTime(
           interaction,
-          "❌ | **Lavalink node not connected**"
+          "<:notconect:994370772040695808>** ・ Lavalink не подключен или устарел**"
         );
       }
 
@@ -265,14 +265,14 @@ module.exports = {
             if (!player.queue.current) player.destroy();
             return client.sendError(
               interaction,
-              `❌ | **There was an error while searching**`
+              `<:N_:993656004636053524>** ・ При поиске произошла ошибка**`
             );
 
           case "NO_MATCHES":
             if (!player.queue.current) player.destroy();
             return client.sendTime(
               interaction,
-              "❌ | **No results were found.**"
+              "<:N_:993656004636053524>** ・ Ничего не найдено**"
             );
           case "TRACK_LOADED":
             player.queue.add(TrackUtils.build(Searched.tracks[0], member.user));
@@ -280,7 +280,7 @@ module.exports = {
               player.play();
             let SongAddedEmbed = new MessageEmbed();
             SongAddedEmbed.setAuthor(
-              `Added to queue`,
+              `Добавлено в очередь воспроизведения`,
               client.botconfig.IconURL
             );
             SongAddedEmbed.setColor(client.botconfig.EmbedColor);
@@ -288,13 +288,13 @@ module.exports = {
               `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
             );
             SongAddedEmbed.addField(
-              "Author",
+              "Канал",
               Searched.tracks[0].info.author,
               true
             );
             if (player.queue.totalSize > 1)
               SongAddedEmbed.addField(
-                "Position in queue",
+                "Позиция в очереди воспроизведения",
                 `${player.queue.size - 0}`,
                 true
               );
@@ -305,15 +305,15 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length)
               player.play();
             let SongAdded = new MessageEmbed();
-            SongAdded.setAuthor(`Added to queue`, client.botconfig.IconURL);
+            SongAdded.setAuthor(`Добавлено в очередь воспроизведения`, client.botconfig.IconURL);
             SongAdded.setColor(client.botconfig.EmbedColor);
             SongAdded.setDescription(
               `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
             );
-            SongAdded.addField("Author", Searched.tracks[0].info.author, true);
+            SongAdded.addField("Канал", Searched.tracks[0].info.author, true);
             if (player.queue.totalSize > 1)
               SongAdded.addField(
-                "Position in queue",
+                "Позиция в очереди воспроизведения",
                 `${player.queue.size - 0}`,
                 true
               );
@@ -332,15 +332,15 @@ module.exports = {
               player.play();
             let Playlist = new MessageEmbed();
             Playlist.setAuthor(
-              `Playlist added to queue`,
+              `Плейлист добавлен в очередь воспроизведения`,
               client.botconfig.IconURL
             );
             Playlist.setDescription(
               `[${Searched.playlistInfo.name}](${interaction.data.options[0].value})`
             );
             Playlist.addField(
-              "Enqueued",
-              `\`${Searched.tracks.length}\` songs`,
+              "В очереди",
+              `\`${Searched.tracks.length}\` песен`,
               false
             );
             return interaction.send(Playlist);
@@ -352,13 +352,13 @@ module.exports = {
             if (!player.queue.current) player.destroy();
             return client.sendError(
               interaction,
-              `❌ | **There was an error while searching**`
+              `<:N_:993656004636053524>** ・ При поиске произошла ошибка**`
             );
           }
         } catch (err) {
           return client.sendError(
             interaction,
-            `There was an error while searching: ${err.message}`
+            `<:N_:993656004636053524>** ・ При поиске произошла ошибка: ${err.message}**`
           );
         }
         switch (res.loadType) {
@@ -366,7 +366,7 @@ module.exports = {
             if (!player.queue.current) player.destroy();
             return client.sendTime(
               interaction,
-              "❌ | **No results were found.**"
+              "<:N_:993656004636053524>** ・ Ничего не найдено**"
             );
           case "TRACK_LOADED":
             player.queue.add(res.tracks[0]);
@@ -374,17 +374,17 @@ module.exports = {
               player.play();
             let SongAddedEmbed = new MessageEmbed();
             SongAddedEmbed.setAuthor(
-              `Added to queue`,
+              `Добавлено в очередь воспроизведения`,
               client.botconfig.IconURL
             );
-            //SongAddedEmbed.setThumbnail(res.tracks[0].displayThumbnail());
+            SongAddedEmbed.setThumbnail(res.tracks[0].displayThumbnail());
             SongAddedEmbed.setColor(client.botconfig.EmbedColor);
             SongAddedEmbed.setDescription(
               `[${res.tracks[0].title}](${res.tracks[0].uri})`
             );
-            SongAddedEmbed.addField("Author", res.tracks[0].author, true);
+            SongAddedEmbed.addField("Канал", res.tracks[0].author, true);
             SongAddedEmbed.addField(
-              "Duration",
+              "Длительность",
               `\`${prettyMilliseconds(res.tracks[0].duration, {
                 colonNotation: true,
               })}\``,
@@ -392,31 +392,31 @@ module.exports = {
             );
             if (player.queue.totalSize > 1)
               SongAddedEmbed.addField(
-                "Position in queue",
+                "Позиция в очереди воспроизведения",
                 `${player.queue.size - 0}`,
                 true
               );
             return interaction.send(SongAddedEmbed);
 
-          case "PLAYLIST_LOADED":
+           case "PLAYLIST_LOADED":
             player.queue.add(res.tracks);
             await player.play();
             let SongAdded = new MessageEmbed();
             SongAdded.setAuthor(
-              `Playlist added to queue`,
+              `Плейлист добавлен в очередь воспроизведения`,
               client.botconfig.IconURL
             );
-            //SongAdded.setThumbnail(res.tracks[0].displayThumbnail());
+            SongAdded.setThumbnail(res.tracks[0].displayThumbnail());
             SongAdded.setDescription(
               `[${res.playlist.name}](${interaction.data.options[0].value})`
             );
             SongAdded.addField(
-              "Enqueued",
-              `\`${res.tracks.length}\` songs`,
+              "В очереди воспроизведения",
+              `\`${res.tracks.length}\` песен`,
               false
             );
             SongAdded.addField(
-              "Playlist duration",
+              "Длительность плейлиста",
               `\`${prettyMilliseconds(res.playlist.duration, {
                 colonNotation: true,
               })}\``,
@@ -430,15 +430,15 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length) {
               let SongAddedEmbed = new MessageEmbed();
               SongAddedEmbed.setAuthor(
-                `Added to queue`,
+                `Добавлено в очередь воспроизведения`,
                 client.botconfig.IconURL
               );
               SongAddedEmbed.setThumbnail(track.displayThumbnail());
               SongAddedEmbed.setColor(client.botconfig.EmbedColor);
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
-              SongAddedEmbed.addField("Author", track.author, true);
+              SongAddedEmbed.addField("Канал", track.author, true);
               SongAddedEmbed.addField(
-                "Duration",
+                "Длительность",
                 `\`${prettyMilliseconds(track.duration, {
                   colonNotation: true,
                 })}\``,
@@ -446,7 +446,7 @@ module.exports = {
               );
               if (player.queue.totalSize > 1)
                 SongAddedEmbed.addField(
-                  "Position in queue",
+                  "Позиция в очереди воспроизведения",
                   `${player.queue.size - 0}`,
                   true
                 );
@@ -455,15 +455,15 @@ module.exports = {
             } else {
               let SongAddedEmbed = new MessageEmbed();
               SongAddedEmbed.setAuthor(
-                `Added to queue`,
+                `Добавлено в очередь воспроизведения`,
                 client.botconfig.IconURL
               );
               SongAddedEmbed.setThumbnail(track.displayThumbnail());
               SongAddedEmbed.setColor(client.botconfig.EmbedColor);
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
-              SongAddedEmbed.addField("Author", track.author, true);
+              SongAddedEmbed.addField("Канал", track.author, true);
               SongAddedEmbed.addField(
-                "Duration",
+                "Длительность",
                 `\`${prettyMilliseconds(track.duration, {
                   colonNotation: true,
                 })}\``,
@@ -471,7 +471,7 @@ module.exports = {
               );
               if (player.queue.totalSize > 1)
                 SongAddedEmbed.addField(
-                  "Position in queue",
+                  "Позиция в очереди воспроизведения",
                   `${player.queue.size - 0}`,
                   true
                 );

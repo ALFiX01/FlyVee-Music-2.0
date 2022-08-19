@@ -2,13 +2,13 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "disconnect",
-  description: "Stop the music and leave the voice channel",
+  description: "Остановливает музыку",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["leave", "exit", "quit", "dc", "stop"],
+  aliases: ["leave", "exit", "quit", "dc", "stop", "dis", "diss", "st"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -21,15 +21,15 @@ module.exports = {
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel use this command**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не играет...**"
       );
-    await client.sendTime(message.channel, ":notes: | **Disconnected!**");
-    await message.react("✅");
+    await client.sendTime(message.channel, "<:stop:985661646372491335>**・Воспроизведение остановлено!**");
+    await message.react("<:Ready:985608370348257300>");
     player.destroy();
   },
 
@@ -48,7 +48,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       if (
         guild.me.voice.channel &&
@@ -56,17 +56,17 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          `❌ | **You must be in ${guild.me.voice.channel} to use this command.**`
+          `<:N_:993656004636053524>** ・ Вы должны быть в ${guild.me.voice.channel}, чтобы использовать эту команду**`
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       player.destroy();
-      client.sendTime(interaction, ":notes: | **Disconnected!**");
+      client.sendTime(interaction, "<:stop:985661646372491335>** ・ Воспрозведение остановлено!**");
     },
   },
 };

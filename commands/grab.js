@@ -3,13 +3,13 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "grab",
-  description: "Saves the current song to your Direct Messages",
+  description: "Сохраняет текущий трек в ваших личных сообщениях",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["save"],
+  aliases: ["save", "gr"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -22,17 +22,17 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!player.playing)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to play something!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -40,13 +40,13 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
     message.author
       .send(
         new MessageEmbed()
           .setAuthor(
-            `Song saved`,
+            `Песня сохранена`,
             client.user.displayAvatarURL({
               dynamic: true,
             })
@@ -58,32 +58,32 @@ module.exports = {
           .setColor(client.botconfig.EmbedColor)
           .setTitle(`**${player.queue.current.title}**`)
           .addField(
-            `⌛ Duration: `,
+            `<:time:985647505784070234>・Длительность: `,
             `\`${prettyMilliseconds(player.queue.current.duration, {
               colonNotation: true,
             })}\``,
             true
           )
-          .addField(`🎵 Author: `, `\`${player.queue.current.author}\``, true)
+          .addField(`<:yt:985664100992450632>・Канал: `, `\`${player.queue.current.author}\``, true)
           .addField(
-            `▶ Play it:`,
+            `<:play:985663370017513522>・Команда воспроизведения:`,
             `\`${
               GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
             }play ${player.queue.current.uri}\``
           )
-          .addField(`🔎 Saved in:`, `<#${message.channel.id}>`)
+          .addField(`<:save:985662901924818954>・Сохранено из канала:`, `<#${message.channel.id}>`)
           .setFooter(
-            `Requested by: ${player.queue.current.requester.tag}`,
+            `Запросил: ${player.queue.current.requester.tag}`,
             player.queue.current.requester.displayAvatarURL({
               dynamic: true,
             })
           )
       )
       .catch((e) => {
-        return message.channel.send("**❌ Your DMs are disabled**");
+        return message.channel.send("<:N_:993656004636053524>** ・ Ваши личные сообщения отключены**");
       });
 
-    client.sendTime(message.channel, "✅ | **Check your DMs!**");
+    client.sendTime(message.channel, "<:Y_:993656002912198746>** ・ Проверьте свои личные сообщения!**");
   },
   SlashCommand: {
     /**
@@ -101,17 +101,17 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!player.playing)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -119,11 +119,11 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       try {
         let embed = new MessageEmbed()
-          .setAuthor(`Song saved: `, client.user.displayAvatarURL())
+          .setAuthor(`Песня сохранена: `, client.user.displayAvatarURL())
           .setThumbnail(
             `https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`
           )
@@ -132,32 +132,32 @@ module.exports = {
           .setTimestamp()
           .setTitle(`**${player.queue.current.title}**`)
           .addField(
-            `⌛ Duration: `,
+            `<:time:985647505784070234>・Длительность: `,
             `\`${prettyMilliseconds(player.queue.current.duration, {
               colonNotation: true,
             })}\``,
             true
           )
-          .addField(`🎵 Author: `, `\`${player.queue.current.author}\``, true)
+          .addField(`<:yt:985664100992450632>・Канал: `, `\`${player.queue.current.author}\``, true)
           .addField(
-            `▶ Play it:`,
+            `<:play:985663370017513522>・Команда воспроизведения:`,
             `\`${
               GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
             }play ${player.queue.current.uri}\``
           )
-          .addField(`🔎 Saved in:`, `<#${interaction.channel_id}>`)
+          .addField(`<:save:985662901924818954>・ Сохранено из канала:`, `<#${interaction.channel_id}>`)
           .setFooter(
-            `Requested by: ${player.queue.current.requester.tag}`,
+            `Запросил: ${player.queue.current.requester.tag}`,
             player.queue.current.requester.displayAvatarURL({
               dynamic: true,
             })
           );
         user.send(embed);
       } catch (e) {
-        return client.sendTime(interaction, "**❌ Your DMs are disabled**");
+        return client.sendTime(interaction, "<:N_:993656004636053524>** ・ Ваши личные сообщения отключены**");
       }
 
-      client.sendTime(interaction, "✅ | **Check your DMs!**");
+      client.sendTime(interaction, "<:Y_:993656002912198746>** ・ Проверьте свои личные сообщения!**");
     },
   },
 };

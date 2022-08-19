@@ -3,13 +3,13 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "resume",
-  description: "Resumes the music",
+  description: "Возобновляет воспроизведение музыки",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: [],
+  aliases: ["res"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,16 +35,16 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
 
     if (player.playing)
       return client.sendTime(
         message.channel,
-        "❌ | **Music is already resumed!**"
+        "<:N_:993656004636053524>** ・ Воспроизведение уже возобновлено!**"
       );
     player.pause(false);
-    await message.react("✅");
+    await message.react("<:Ready:985608370348257300>");
   },
 
   SlashCommand: {
@@ -62,7 +62,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -70,22 +70,22 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (player.playing)
         return client.sendTime(
           interaction,
-          "❌ | **Music is already resumed!**"
+          "<:N_:993656004636053524>** ・ Воспроизведение уже возобновлено!**"
         );
       player.pause(false);
-      client.sendTime(interaction, "**⏯ Resumed!**");
+      client.sendTime(interaction, "<:Resume:985661362879463474>** ・ Воспроизведение возобновлено!**");
     },
   },
 };

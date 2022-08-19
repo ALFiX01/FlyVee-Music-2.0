@@ -1,14 +1,14 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "invite",
-  description: "Приглашает бота на ваш сервер",
+  name: "update",
+  description: "Показыкавет описание последнего обновления",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["inv"],
+  aliases: ["upd"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -18,12 +18,9 @@ module.exports = {
    */
   run: async (client, message, args, { GuildDB }) => {
     let embed = new MessageEmbed()
-      .setAuthor(
-        "Спасибо за доверие!",
-        client.user.displayAvatarURL()
-      )
+      .setAuthor(`Описание последнего обновления - 1.1.0`, client.botconfig.IconURL)
       .setColor("#77acb8")
-      .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=980929815999807558&permissions=2147503104&scope=bot%20applications.commands)`
+      .setDescription(`1. Устранено несколько проблем, приводящих к поломке бота.)`
       );
     message.channel.send(embed);
   },
@@ -37,12 +34,9 @@ module.exports = {
      */
     run: async (client, interaction, args, { GuildDB }) => {
       let embed = new MessageEmbed()
-        .setAuthor(
-          "Спасибо за доверие!",
-          client.user.displayAvatarURL()
-        )
-        .setColor("#77acb8")
-        .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=980929815999807558&permissions=2147503104&scope=bot%20applications.commands)`
+      .setAuthor(`Описание последнего обновления - 1.1.0`, client.botconfig.IconURL)
+      .setColor("#77acb8")
+      .setDescription(`1. Устранено несколько проблем, приводящих к поломке бота.)`
         );
         interaction.send(embed);
     },

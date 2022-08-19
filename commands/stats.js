@@ -5,13 +5,13 @@ const moment = require("moment");
 
 module.exports = {
   name: "stats",
-  description: "Get information about the bot",
+  description: "Показывает статистику бота",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
-    member: [],
+    member: ["ADMINISTRATOR"],
   },
-  aliases: ["about", "ping", "info"],
+  aliases: ["about", "ping", "info", "inf", "stat"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -27,61 +27,44 @@ module.exports = {
       }
       const duration = moment
         .duration(message.client.uptime)
-        .format(" D[d], H[h], m[m]");
+        .format(" D[ дн], H[ ч], m[ мин]");
 
       const embed = new MessageEmbed();
       embed.setColor(client.botconfig.EmbedColor);
-      embed.setTitle(`Stats from \`${client.user.username}\``);
+      embed.setAuthor(`Моя статитстика`, client.botconfig.IconURL)
       embed.addFields(
         {
-          name: ":ping_pong: Ping",
-          value: `┕\`${Math.round(client.ws.ping)}ms\``,
+          name: "<:ping:985647507109449788>・Пинг",
+          value: `┕\`${Math.round(client.ws.ping)} мс\``,
           inline: true,
         },
         {
-          name: ":clock1: Uptime",
+          name: "<:time:985647505784070234>・Время работы",
           value: `┕\`${duration}\``,
           inline: true,
         },
         {
-          name: ":file_cabinet: Memory",
+          name: "<:mem:985647503963717672>・Память",
           value: `┕\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
             2
-          )}mb\``,
+          )} мб\``,
           inline: true,
         }
       );
-
+      
       embed.addFields(
         {
-          name: ":homes: Servers",
-          value: `┕\`${client.guilds.cache.size}\``,
+          name: "<:Ver:985651443061112904>・Версия",
+          value: `┕\`${require("../package.json").version}\``,
           inline: true,
         },
         {
-          name: ":busts_in_silhouette: Users",
-          value: `┕\`${client.users.cache.size}\``,
+          name: "<:DS:985651439424659496>・Discord.js",
+          value: `┕\`${version}\``,
           inline: true,
         },
         {
-          name: ":control_knobs: API Latency",
-          value: `┕\`${message.client.ws.ping}ms\``,
-          inline: true,
-        }
-      );
-      embed.addFields(
-        {
-          name: ":robot: Version",
-          value: `┕\`v${require("../package.json").version}\``,
-          inline: true,
-        },
-        {
-          name: ":blue_book: Discord.js",
-          value: `┕\`v${version}\``,
-          inline: true,
-        },
-        {
-          name: ":green_book: Node",
+          name: "<:Node:985651441127546920>・Node",
           value: `┕\`${process.version}\``,
           inline: true,
         }
@@ -106,61 +89,44 @@ module.exports = {
         }
         const duration = moment
           .duration(client.uptime)
-          .format(" D[d], H[h], m[m]");
+          .format(" D[ дн], H[ ч], m[ мин]");
 
         const embed = new MessageEmbed();
         embed.setColor(client.botconfig.EmbedColor);
-        embed.setTitle(`Stats from \`${client.user.username}\``);
+        embed.setAuthor(`Моя статитстика`, client.botconfig.IconURL)
         embed.addFields(
           {
-            name: ":ping_pong: Ping",
-            value: `┕\`${Math.round(client.ws.ping)}ms\``,
+            name: "<:ping:985647507109449788>・Пинг",
+            value: `┕\`${Math.round(client.ws.ping)} мс\``,
             inline: true,
           },
           {
-            name: ":clock1: Uptime",
+            name: "<:time:985647505784070234>・Время работы",
             value: `┕\`${duration}\``,
             inline: true,
           },
           {
-            name: ":file_cabinet: Memory",
+            name: "<:mem:985647503963717672>・Память",
             value: `┕\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
               2
-            )}mb\``,
+            )} мб\``,
             inline: true,
           }
         );
 
         embed.addFields(
           {
-            name: ":homes: Servers",
-            value: `┕\`${client.guilds.cache.size}\``,
+            name: "<:Ver:985651443061112904>・Версия",
+            value: `┕\`${require("../package.json").version}\``,
             inline: true,
           },
           {
-            name: ":busts_in_silhouette: Users",
-            value: `┕\`${client.users.cache.size}\``,
+            name: "<:DS:985651439424659496>・Discord.js",
+            value: `┕\`${version}\``,
             inline: true,
           },
           {
-            name: ":control_knobs: API Latency",
-            value: `┕\`${client.ws.ping}ms\``,
-            inline: true,
-          }
-        );
-        embed.addFields(
-          {
-            name: ":robot: Version",
-            value: `┕\`v${require("../package.json").version}\``,
-            inline: true,
-          },
-          {
-            name: ":blue_book: Discord.js",
-            value: `┕\`v${version}\``,
-            inline: true,
-          },
-          {
-            name: ":green_book: Node",
+            name: "<:Node:985651441127546920>・Node",
             value: `┕\`${process.version}\``,
             inline: true,
           }

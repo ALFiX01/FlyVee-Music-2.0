@@ -3,8 +3,8 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "volume",
-  description: "Check or change the current volume",
-  usage: "<volume>",
+  description: "Проверяет или изменяет текущую громкость",
+  usage: "<Громкость>",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -22,17 +22,17 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!args[0])
       return client.sendTime(
         message.channel,
-        `🔉 | Current volume \`${player.volume}\`.`
+        `<:vol:985639244737437706>**・Текущая громкость:** \`${player.volume}\`.`
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -40,24 +40,24 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
     if (!parseInt(args[0]))
       return client.sendTime(
         message.channel,
-        `**Please choose a number between** \`1 - 100\``
+        `**Пожалуйста, выберите число между** \`1 - 100\``
       );
     let vol = parseInt(args[0]);
     if (vol < 0 || vol > 100) {
       return client.sendTime(
         message.channel,
-        "❌ | **Please Choose A Number Between `1-100`**"
+        "<:N_:993656004636053524>** ・ Пожалуйста, выберите число между `1-100`**"
       );
     } else {
       player.setVolume(vol);
       client.sendTime(
         message.channel,
-        `🔉 | **Volume set to** \`${player.volume}\``
+        `<:volum:994674037831766057>** ・ Громкость установлена ​​на** \`${player.volume}\``
       );
     }
   },
@@ -68,7 +68,7 @@ module.exports = {
         value: "amount",
         type: 4,
         required: false,
-        description: "Enter a volume from 1-100. Default is 100.",
+        description: "Введите громкость от 1 до 100. По умолчанию 100",
       },
     ],
     /**
@@ -85,7 +85,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | You must be in a voice channel to use this command."
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -93,27 +93,27 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!args[0].value)
         return client.sendTime(
           interaction,
-          `🔉 | Current volume \`${player.volume}\`.`
+          `<:volum:994674037831766057>**・Текущая громкость:** \`${player.volume}\`.`
         );
       let vol = parseInt(args[0].value);
       if (!vol || vol < 1 || vol > 100)
         return client.sendTime(
           interaction,
-          `**Please choose a number between** \`1 - 100\``
+          `**Пожалуйста, выберите число между** \`1 - 100\``
         );
       player.setVolume(vol);
-      client.sendTime(interaction, `🔉 | Volume set to \`${player.volume}\``);
+      client.sendTime(interaction, `<:volum:994674037831766057>** ・ Громкость установлена ​​на** \`${player.volume}\``);
     },
   },
 };

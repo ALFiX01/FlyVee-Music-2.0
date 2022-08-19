@@ -1,15 +1,15 @@
 const { MessageEmbed } = require("discord.js");
 const { TrackUtils } = require("erela.js");
 const levels = {
-  none: 0.0,
-  low: 0.2,
-  medium: 0.3,
-  high: 0.35,
+  выключен: 0.0,
+  низкий: 0.20,
+  средний: 0.40,
+  высокий: 0.80,
 };
 module.exports = {
   name: "bassboost",
-  description: "Enables bass boosting audio effect",
-  usage: "<none|low|medium|high>",
+  description: "Включает bassboost",
+  usage: "<выключен|низкий|средний|высокий>",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -27,12 +27,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -40,14 +40,14 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
 
     if (!args[0])
       return client.sendTime(
         message.channel,
-        "**Please provide a bassboost level. \nAvailable Levels:** `none`, `low`, `medium`, `high`"
-      );
+        "**Укажите уровень bassboost. \nДоступные уровни:** `выключен`, `низкий`, `средний`, `высокий`"
+      ); //if the user do not provide args [arguments]
 
     let level = "none";
     if (args.length && args[0].toLowerCase() in levels)
@@ -61,14 +61,14 @@ module.exports = {
 
     return client.sendTime(
       message.channel,
-      `✅ | **Bassboost level set to** \`${level}\``
+      `<:bass:993804599163093022>** ・ Уровень bassboost установлен на** \`${level}\``
     );
   },
   SlashCommand: {
     options: [
       {
         name: "level",
-        description: `Please provide a bassboost level. Available Levels: low, medium, high, or none`,
+        description: `Укажите уровень bassboost. Доступные уровни: низкий, средний, высокий или выключен`,
         value: "[level]",
         type: 3,
         required: true,
@@ -84,10 +84,10 @@ module.exports = {
 
     run: async (client, interaction, args, { GuildDB }) => {
       const levels = {
-        none: 0.0,
-        low: 0.2,
-        medium: 0.3,
-        high: 0.35,
+        выключен: 0.0,
+        низкий: 0.20,
+        средний: 0.40,
+        высокий: 0.80,
       };
 
       let player = await client.Manager.get(interaction.guild_id);
@@ -97,12 +97,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -110,13 +110,13 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       if (!args)
         return client.sendTime(
           interaction,
-          "**Please provide a bassboost level. \nAvailable Levels:** `none`, `low`, `medium`, `high`"
-        );
+          "**Укажите уровень bassboost. \nДоступные уровни:** `выключен`, `низкий`, `средний`, `высокий`"
+        ); //if the user do not provide args [arguments]
 
       let level = "none";
       if (args.length && args[0].value in levels) level = args[0].value;
@@ -129,7 +129,7 @@ module.exports = {
 
       return client.sendTime(
         interaction,
-        `✅ | **Set the bassboost level to** \`${level}\``
+        `<:bass:993804599163093022>** ・ Уровень bassboost установлен на** \`${level}\``
       );
     },
   },

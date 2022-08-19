@@ -4,7 +4,7 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "queue",
-  description: "Shows all currently enqueued songs",
+  description: "Показывает все треки, которые в данный момент находятся в очереди",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -23,19 +23,19 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
 
     if (!player.queue || !player.queue.length || player.queue === 0) {
       let QueueEmbed = new MessageEmbed()
-        .setAuthor("Currently playing", client.botconfig.IconURL)
+        .setAuthor("Сейчас воспроизводится", client.botconfig.IconURL)
         .setColor(client.botconfig.EmbedColor)
         .setDescription(
           `[${player.queue.current.title}](${player.queue.current.uri})`
         )
-        .addField("Requested by", `${player.queue.current.requester}`, true)
+        .addField("Запросил:", `${player.queue.current.requester}`, true)
         .addField(
-          "Duration",
+          "Длительность:",
           `${
             client.ProgressBar(
               player.position,
@@ -67,26 +67,26 @@ module.exports = {
             {
               colonNotation: true,
             }
-          )}\` **|** Requested by: ${t.requester}\n`
+          )}\` **|** Запросил: ${t.requester}\n`
       ).join("\n");
 
       let Embed = new MessageEmbed()
-        .setAuthor("Queue", client.botconfig.IconURL)
+        .setAuthor("Очередь", client.botconfig.IconURL)
         .setColor(client.botconfig.EmbedColor)
         .setDescription(
-          `**Currently Playing:** \n[${player.queue.current.title}](${player.queue.current.uri}) \n\n**Up Next:** \n${SongsDescription}\n\n`
+          `**Сейчас воспроизводится:** \n[${player.queue.current.title}](${player.queue.current.uri}) \n\n**Следующий:** \n${SongsDescription}\n\n`
         )
-        .addField("Total songs: \n", `\`${player.queue.totalSize - 1}\``, true)
+        .addField("Всего треков: \n", `\`${player.queue.totalSize - 1}\``, true)
         .addField(
-          "Total length: \n",
+          "Общая длина: \n",
           `\`${prettyMilliseconds(player.queue.duration, {
             colonNotation: true,
           })}\``,
           true
         )
-        .addField("Requested by:", `${player.queue.current.requester}`, true)
+        .addField("Запросил:", `${player.queue.current.requester}`, true)
         .addField(
-          "Current song duration:",
+          "Продолжительность текущего трека:",
           `${
             client.ProgressBar(
               player.position,
@@ -132,19 +132,19 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
 
       if (!player.queue || !player.queue.length || player.queue === 0) {
         let QueueEmbed = new MessageEmbed()
-          .setAuthor("Currently playing", client.botconfig.IconURL)
+          .setAuthor("Сейчас воспроизводится", client.botconfig.IconURL)
           .setColor(client.botconfig.EmbedColor)
           .setDescription(
             `[${player.queue.current.title}](${player.queue.current.uri})`
           )
-          .addField("Requested by", `${player.queue.current.requester}`, true)
+          .addField("Запросил:", `${player.queue.current.requester}`, true)
           .addField(
-            "Duration",
+            "Длительность:",
             `${
               client.ProgressBar(
                 player.position,
@@ -175,30 +175,30 @@ module.exports = {
               t.uri
             }) \n\`${prettyMilliseconds(t.duration, {
               colonNotation: true,
-            })}\` **|** Requested by: ${t.requester}\n`
+            })}\` **|** Запросил: ${t.requester}\n`
         ).join("\n");
 
         let Embed = new MessageEmbed()
-          .setAuthor("Queue", client.botconfig.IconURL)
+          .setAuthor("Очередь", client.botconfig.IconURL)
           .setColor(client.botconfig.EmbedColor)
           .setDescription(
-            `**Currently Playing:** \n[${player.queue.current.title}](${player.queue.current.uri}) \n\n**Up Next:** \n${SongsDescription}\n\n`
+            `**Сейчас воспроизводится:** \n[${player.queue.current.title}](${player.queue.current.uri}) \n\n**Следующий:** \n${SongsDescription}\n\n`
           )
           .addField(
-            "Total songs: \n",
+            "Всего треков: \n",
             `\`${player.queue.totalSize - 1}\``,
             true
           )
           .addField(
-            "Total length: \n",
+            "Общая длина: \n",
             `\`${prettyMilliseconds(player.queue.duration, {
               colonNotation: true,
             })}\``,
             true
           )
-          .addField("Requested by:", `${player.queue.current.requester}`, true)
+          .addField("Запросил:", `${player.queue.current.requester}`, true)
           .addField(
-            "Current song duration:",
+            "Продолжительность текущего трека:",
             `${
               client.ProgressBar(
                 player.position,

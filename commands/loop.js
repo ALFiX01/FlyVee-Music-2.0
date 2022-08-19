@@ -3,13 +3,13 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "loop",
-  description: "Loop the current song",
+  description: "Зацикливает текущий трек",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["l", "repeat"],
+  aliases: ["l", "lp", "repeat"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,15 +35,15 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
 
     if (player.trackRepeat) {
       player.setTrackRepeat(false);
-      client.sendTime(message.channel, `🔂  \`Disabled\``);
+      client.sendTime(message.channel, `**<:loope:993649996496896061> ・ Повтор трека:** \`Выключен\``);
     } else {
       player.setTrackRepeat(true);
-      client.sendTime(message.channel, `🔂 \`Enabled\``);
+      client.sendTime(message.channel, `**<:loope:993649996496896061> ・ Повтор трека:** \`Включен\``);
     }
   },
   SlashCommand: {
@@ -62,12 +62,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | You must be in a voice channel to use this command."
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -75,15 +75,15 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
 
       if (player.trackRepeat) {
         player.setTrackRepeat(false);
-        client.sendTime(interaction, `🔂 \`Disabled\``);
+        client.sendTime(interaction, `**<:loope:993649996496896061> ・ Повтор трека:** \`Выключен\``);
       } else {
         player.setTrackRepeat(true);
-        client.sendTime(interaction, `🔂 \`Enabled\``);
+        client.sendTime(interaction, `**<:loope:993649996496896061> ・ Повтор трека:** \`Включен\``);
       }
       console.log(interaction.data);
     },

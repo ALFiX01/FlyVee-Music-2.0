@@ -3,7 +3,7 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "nowplaying",
-  description: "See what song is currently playing",
+  description: "Показывает, какой трек сейчас играет",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -22,17 +22,17 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
 
     let song = player.queue.current;
     let QueueEmbed = new MessageEmbed()
-      .setAuthor("Currently playing", client.botconfig.IconURL)
+      .setAuthor("Сейчас играет", client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
       .setDescription(`[${song.title}](${song.uri})`)
-      .addField("Requested by", `${song.requester}`, true)
+      .addField("Запросил", `${song.requester}`, true)
       .addField(
-        "Duration",
+        "Длительность",
         `${
           client.ProgressBar(player.position, player.queue.current.duration, 15)
             .Bar
@@ -59,17 +59,17 @@ module.exports = {
       if (!player.queue.current)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
 
       let song = player.queue.current;
       let QueueEmbed = new MessageEmbed()
-        .setAuthor("Currently playing", client.botconfig.IconURL)
+        .setAuthor("Сейчас играет", client.botconfig.IconURL)
         .setColor(client.botconfig.EmbedColor)
         .setDescription(`[${song.title}](${song.uri})`)
-        .addField("Requested by", `${song.requester}`, true)
+        .addField("Запросил", `${song.requester}`, true)
         .addField(
-          "Duration",
+          "Длительность",
           `${
             client.ProgressBar(
               player.position,

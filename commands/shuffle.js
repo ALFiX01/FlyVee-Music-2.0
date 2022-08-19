@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "shuffle",
-  description: "Shuffles the queue",
+  description: "Перемешивает очередь",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -21,12 +21,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:NO:985617965930151946>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -34,15 +34,16 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
     if (!player.queue || !player.queue.length || player.queue.length === 0)
       return client.sendTime(
         message.channel,
-        "❌ | **Not enough songs in the queue to shuffle!**"
+        "<:N_:993656004636053524>** ・ Недостаточно треков в очереди для перемешивания!**"
       );
     player.queue.shuffle();
-    await client.sendTime(message.channel, "✅ | Shuffled the queue!");
+    await client.sendTime(message.channel, "<:shuffle:994679826990518393> ・ Очередь воспроиведения перемешана!");
+    await message.react("<:Ready:985608370348257300>");
   },
   SlashCommand: {
     /**
@@ -59,7 +60,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -67,22 +68,22 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction.channel,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       if (!player.queue || !player.queue.length || player.queue.length === 0)
         return client.sendTime(
           interaction,
-          "❌ | **Not enough songs in the queue to shuffle!**"
+          "<:N_:993656004636053524>** ・ Недостаточно треков в очереди для перемешивания!**"
         );
       player.queue.shuffle();
-      client.sendTime(interaction, "✅ | Shuffled the queue!");
+      client.sendTime(interaction, "<:shuffle:994679826990518393> ・ Очередь воспроиведения перемешана!");
     },
   },
 };

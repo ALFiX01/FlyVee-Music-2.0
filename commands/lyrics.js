@@ -5,13 +5,13 @@ const _ = require("lodash");
 
 module.exports = {
   name: "lyrics",
-  description: "Shows the lyrics of the song searched",
-  usage: "[Song Name]",
+  description: "Показывает текст искомого трека",
+  usage: "[Название песни]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["ly"],
+  aliases: ["ly", "lyr", "lr"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -26,7 +26,7 @@ module.exports = {
     if (!args[0] && !player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524> ・ **Сейчас ничего не играет...**"
       );
     if (!args[0]) SongTitle = player.queue.current.title;
     SongTitle = SongTitle.replace(
@@ -38,14 +38,14 @@ module.exports = {
     if (!lyrics)
       return client.sendTime(
         message.channel,
-        `**No lyrics found for -** \`${SongTitle}\``
+        `**Текст для песни \`${SongTitle}\` - не найден**`
       );
     lyrics = lyrics.split("\n"); //spliting into lines
     let SplitedLyrics = _.chunk(lyrics, 40); //45 lines each page
 
     let Pages = SplitedLyrics.map((ly) => {
       let em = new MessageEmbed()
-        .setAuthor(`Lyrics for: ${SongTitle}`, client.botconfig.IconURL)
+        .setAuthor(`Текст песни для: ${SongTitle}`, client.botconfig.IconURL)
         .setColor(client.botconfig.EmbedColor)
         .setDescription(ly.join("\n"));
 
@@ -66,7 +66,7 @@ module.exports = {
         name: "song",
         value: "song",
         type: 3,
-        description: "Enter a song name to search",
+        description: "Введите название трека для поиска его текста",
         required: false,
       },
     ],
@@ -84,7 +84,7 @@ module.exports = {
       if (!interaction.data.options && !player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не играет...**"
         );
 
       SongTitle = interaction.data.options
@@ -95,14 +95,14 @@ module.exports = {
       if (lyrics.length === 0)
         return client.sendTime(
           interaction,
-          `**No lyrics found for -** \`${SongTitle}\``
+          `**Текст для трека не найден -** \`${SongTitle}\``
         );
       lyrics = lyrics.split("\n"); //spliting into lines
       let SplitedLyrics = _.chunk(lyrics, 40); //45 lines each page
 
       let Pages = SplitedLyrics.map((ly) => {
         let em = new MessageEmbed()
-          .setAuthor(`Lyrics for: ${SongTitle}`, client.botconfig.IconURL)
+          .setAuthor(`Текст трека для: ${SongTitle}`, client.botconfig.IconURL)
           .setColor(client.botconfig.EmbedColor)
           .setDescription(ly.join("\n"));
 

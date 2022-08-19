@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "clear",
-  description: "Clears the server queue",
+  description: "Очищает очередь сервера",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -21,18 +21,18 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
 
     if (!player.queue || !player.queue.length || player.queue.length === 0)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to play something!**"
+        "<:N_:993656004636053524>** ・ Для воспроизведения музыки вы должны быть в голосовом канале!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -40,10 +40,11 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in the same voice channel as me to use this command!**"
+        "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
       );
     player.queue.clear();
-    await client.sendTime(message.channel, "✅ | **Cleared the queue!**");
+    await client.sendTime(message.channel, "<:Y_:993656002912198746>** ・ Очередь очищена!**");
+    await message.react("<:Ready:985608370348257300>");
   },
 
   SlashCommand: {
@@ -60,7 +61,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | You must be in a voice channel to use this command."
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в голосовом канале!**"
         );
       if (
         guild.me.voice.channel &&
@@ -68,22 +69,22 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          "❌ | **You must be in the same voice channel as me to use this command!**"
+          "<:N_:993656004636053524>** ・ Для использования этой команды вы должны быть в том же голосовом канале, что и я!**"
         );
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
 
       if (!player.queue || !player.queue.length || player.queue.length === 0)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "<:N_:993656004636053524>** ・ Сейчас ничего не воспроизводится...**"
         );
       player.queue.clear();
-      await client.sendTime(interaction, "✅ | **Cleared the queue!**");
+      await client.sendTime(interaction, "<:Y_:993656002912198746>** ・ Очередь очищена!**");
     },
   },
 };
