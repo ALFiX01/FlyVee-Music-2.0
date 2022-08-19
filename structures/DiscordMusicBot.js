@@ -166,12 +166,12 @@ class DiscordMusicBot extends Client {
       .on("trackStart", async (player, track) => {
         this.SongsPlayed++;
         let TrackStartedEmbed = new MessageEmbed()
-          .setAuthor(`Now playing ♪`, this.botconfig.IconURL)
+          .setAuthor(`Сейчас воспроизводится ♪`, this.botconfig.IconURL)
           .setThumbnail(player.queue.current.displayThumbnail())
           .setDescription(`[${track.title}](${track.uri})`)
-          .addField("Requested by", `${track.requester}`, true)
+          .addField("Запросил", `${track.requester}`, true)
           .addField(
-            "Duration",
+            "Длительность",
             `\`${prettyMilliseconds(track.duration, {
               colonNotation: true,
             })}\``,
@@ -186,7 +186,7 @@ class DiscordMusicBot extends Client {
       })
       .on("queueEnd", (player) => {
         let QueueEmbed = new MessageEmbed()
-          .setAuthor("The queue has ended", this.botconfig.IconURL)
+          .setAuthor("Очередь воспроизведения закончилась", this.botconfig.IconURL)
           .setColor(this.botconfig.EmbedColor)
           .setTimestamp();
         client.channels.cache.get(player.textChannel).send(QueueEmbed);
@@ -241,11 +241,11 @@ class DiscordMusicBot extends Client {
 
   sendError(Channel, Error) {
     let embed = new MessageEmbed()
-      .setTitle("An error occured")
+      .setTitle("Произошла ошибка")
       .setColor("RED")
       .setDescription(Error)
       .setFooter(
-        "If you think this as a bug, please report it in the support server!"
+        "Если вы считаете это багом, сообщите об этом на сервер поддержки!"
       );
 
     Channel.send(embed);
