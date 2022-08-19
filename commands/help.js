@@ -37,7 +37,7 @@ module.exports = {
         }help [Команда]`
       ).setDescription(`${Commands.join("\n")}
   
-  Версия: ${require("../package.json").version}
+  Версия: 2.0
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
     if (!args[0]) message.channel.send(Embed);
@@ -120,7 +120,7 @@ module.exports = {
           }help [Команда]`
         ).setDescription(`${Commands.join("\n")}
   
-        Версия: ${require("../package.json").version}
+        Версия: 2.0
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
       if (!args) return interaction.send(Embed);
