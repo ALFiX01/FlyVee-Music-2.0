@@ -23,7 +23,7 @@ module.exports = {
         client.user.displayAvatarURL()
       )
       .setColor("#77acb8")
-      .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=980929815999807558&permissions=2147503104&scope=bot%20applications.commands)`
+      .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=1010126172228698192&permissions=2147503168&scope=bot%20applications.commands)`
       );
     message.channel.send(embed);
   },
@@ -42,7 +42,7 @@ module.exports = {
           client.user.displayAvatarURL()
         )
         .setColor("#77acb8")
-        .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=980929815999807558&permissions=2147503104&scope=bot%20applications.commands)`
+        .setDescription(`Чтобы пригласить меня, нажмите [здесь](https://discord.com/api/oauth2/authorize?client_id=1010126172228698192&permissions=2147503168&scope=bot%20applications.commands)`
         );
         interaction.send(embed);
     },
