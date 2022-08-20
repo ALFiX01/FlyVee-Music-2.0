@@ -29,7 +29,7 @@ module.exports = {
         `Мои команды`,
         client.botconfig.IconURL
       )
-      .setImage(`https://media.discordapp.net/attachments/985227216612905063/1010544367230009424/Help_Menu.png?width=1440&height=479`)
+      .setImage(`https://media.discordapp.net/attachments/985227216612905063/1010546264997384232/Help_Menu_2.png?width=1440&height=433`)
       .setColor(client.botconfig.EmbedColor)
       .setFooter(
         `Чтобы получить подробную информацию о команде, введите ${
@@ -37,7 +37,7 @@ module.exports = {
         }help [Команда]`
       ).setDescription(`${Commands.join("\n")}
   
-  Версия: 4.0 beta 2
+  Версия: 4.0 beta 2.1
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
     if (!args[0]) message.channel.send(Embed);
@@ -113,7 +113,7 @@ module.exports = {
           `Мои команды`,
           client.botconfig.IconURL
         )
-        .setImage(`https://media.discordapp.net/attachments/985227216612905063/1010544367230009424/Help_Menu.png?width=1440&height=479`)
+        .setImage(`https://media.discordapp.net/attachments/985227216612905063/1010546264997384232/Help_Menu_2.png?width=1440&height=433`)
         .setColor(client.botconfig.EmbedColor)
         .setFooter(
           `Чтобы получить подробную информацию о команде, введите ${
@@ -121,7 +121,7 @@ module.exports = {
           }help [Команда]`
         ).setDescription(`${Commands.join("\n")}
   
-        Версия: 4.0 beta 2
+        Версия: 4.0 beta 2.1
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
       if (!args) return interaction.send(Embed);
