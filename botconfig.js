@@ -15,14 +15,14 @@ module.exports = {
   CookieSecret: "Pikachu is cute", // A cookie for you, cookie for me. make sure you change this value!
   IconURL:
     "https://media.discordapp.net/attachments/985227216612905063/1010317913221243092/SjyG.gif", // URL of all embed author icons | https://i.gifer.com/yy3.gif
-  EmbedColor: "#36393F", // Color of most embeds | Custom Hex value are supported. I.e: "#36393F" "#ddc283"
+  EmbedColor: "#2f3136", // Color of most embeds | Custom Hex value are supported. I.e: "#36393F" "#ddc283"
   Permissions: 2205281600, // Bot Inviting Permissions
   Website: process.env.Website || "https://example.com", // Website where it is hosted at includes http or https || Use "0.0.0.0" if you using Heroku || Do not include /api/callback. Just the website url. I.e. "https://foo.bar"
   // If you get invalid oauth, make sure on the discord developer page you set the oauth url to something like: https://example.com/api/callback.
 
   Presence: {
     status: "online", // You can show online, idle, and dnd
-    name: "/Play !Play | 4.0 b-3.1", // The message shown
+    name: "/Play !Play | 4.0 b-3.2", // The message shown
     type: "LISTENING", // PLAYING, WATCHING, LISTENING, STREAMING
   },
 
