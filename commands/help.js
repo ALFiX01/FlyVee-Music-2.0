@@ -37,7 +37,7 @@ module.exports = {
         }help [Команда]`
       ).setDescription(`${Commands.join("\n")}
   
-  Версия: 4.0 beta 2.1
+  Версия: 4.0 beta 2.2
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
     if (!args[0]) message.channel.send(Embed);
@@ -55,7 +55,7 @@ module.exports = {
         .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
         .setDescription(cmd.description)
         .setColor("#82acb5")
-        //.addField("Name", cmd.name, true)
+        .addField("Name", cmd.name, true)
         .addField("Псевдонимы:", `\`${cmd.aliases.join(", ")}\``, true)
         .addField(
           "Применение:",
@@ -121,7 +121,7 @@ module.exports = {
           }help [Команда]`
         ).setDescription(`${Commands.join("\n")}
   
-        Версия: 4.0 beta 2.1
+        Версия: 4.0 beta 2.2
   [Тех. Поддержка](${
     client.botconfig.SupportServer})`);
       if (!args) return interaction.send(Embed);
@@ -141,7 +141,7 @@ module.exports = {
           .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
           .setDescription(cmd.description)
           .setColor("#82acb5")
-          //.addField("Name", cmd.name, true)
+          .addField("Name", cmd.name, true)
           .addField("Псевдонимы:", cmd.aliases.join(", "), true)
           .addField(
             "Применение:",
