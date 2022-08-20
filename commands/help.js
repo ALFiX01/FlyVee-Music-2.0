@@ -37,8 +37,8 @@ module.exports = {
         }help [Команда]`
       ).setDescription(`${Commands.join("\n")}
   
-  Версия: 4.0 beta 2.2
-  [Тех. Поддержка](${
+  Версия: 4.0 beta 3
+  [Сервер Тех. Поддержки](${
     client.botconfig.SupportServer})`);
     if (!args[0]) message.channel.send(Embed);
     else {
@@ -55,7 +55,7 @@ module.exports = {
         .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
         .setDescription(cmd.description)
         .setColor("#82acb5")
-        .addField("Name", cmd.name, true)
+        .addField("Название", cmd.name, true)
         .addField("Псевдонимы:", `\`${cmd.aliases.join(", ")}\``, true)
         .addField(
           "Применение:",
@@ -66,9 +66,9 @@ module.exports = {
         )
         .addField(
           "Разрешения:",
-          "Участник: " +
+          "Для участника: " +
             cmd.permissions.member.join(", ") +
-            "\nБот: " +
+            "\nДля бота: " +
             cmd.permissions.channel.join(", "),
           true
         )
@@ -121,8 +121,8 @@ module.exports = {
           }help [Команда]`
         ).setDescription(`${Commands.join("\n")}
   
-        Версия: 4.0 beta 2.2
-  [Тех. Поддержка](${
+        Версия: 4.0 beta 3
+  [Сервер Тех. Поддержки](${
     client.botconfig.SupportServer})`);
       if (!args) return interaction.send(Embed);
       else {
@@ -141,7 +141,7 @@ module.exports = {
           .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
           .setDescription(cmd.description)
           .setColor("#82acb5")
-          .addField("Name", cmd.name, true)
+          .addField("Название", cmd.name, true)
           .addField("Псевдонимы:", cmd.aliases.join(", "), true)
           .addField(
             "Применение:",
@@ -152,9 +152,9 @@ module.exports = {
           )
           .addField(
             "Разрешения:",
-            "Участник: " +
+            "Для участника: " +
               cmd.permissions.member.join(", ") +
-              "\nБот: " +
+              "\nДля бота: " +
               cmd.permissions.channel.join(", "),
             true
           )
