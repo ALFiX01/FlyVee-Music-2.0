@@ -14,7 +14,7 @@ module.exports = {
   "24/7": false, // Make the bot stays in VC 24/7 (when you reboot the bot will **not** automatically rejoin.)
   CookieSecret: "Pikachu is cute", // A cookie for you, cookie for me. make sure you change this value!
   IconURL:
-    "https://media.discordapp.net/attachments/985227216612905063/1010317913221243092/SjyG.gif", // URL of all embed author icons | https://i.gifer.com/yy3.gif
+    "", // URL of all embed author icons | https://i.gifer.com/yy3.gif
   EmbedColor: "#2f3136", // Color of most embeds | Custom Hex value are supported. I.e: "#36393F" "#ddc283"
   Permissions: 2205281600, // Bot Inviting Permissions
   Website: process.env.Website || "https://example.com", // Website where it is hosted at includes http or https || Use "0.0.0.0" if you using Heroku || Do not include /api/callback. Just the website url. I.e. "https://foo.bar"
