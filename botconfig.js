@@ -22,7 +22,7 @@ module.exports = {
 
   Presence: {
     status: "online", // You can show online, idle, and dnd
-    name: "/Play !Play | 3.2", // The message shown
+    name: "/Play !Play | 3.3", // The message shown
     type: "LISTENING", // PLAYING, WATCHING, LISTENING, STREAMING
   },
 

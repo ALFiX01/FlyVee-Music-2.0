@@ -2,9 +2,9 @@ const { MessageEmbed } = require("discord.js");
 const { TrackUtils } = require("erela.js");
 const levels = {
   выключен: 0.0,
-  низкий: 0.20,
-  средний: 0.40,
-  высокий: 0.80,
+  низкий: 0.15,
+  средний: 0.30,
+  высокий: 0.70,
 };
 module.exports = {
   name: "bassboost",
@@ -85,9 +85,9 @@ module.exports = {
     run: async (client, interaction, args, { GuildDB }) => {
       const levels = {
         выключен: 0.0,
-        низкий: 0.20,
-        средний: 0.40,
-        высокий: 0.80,
+        низкий: 0.15,
+        средний: 0.30,
+        высокий: 0.70,
       };
 
       let player = await client.Manager.get(interaction.guild_id);

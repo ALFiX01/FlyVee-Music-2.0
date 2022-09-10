@@ -8,7 +8,7 @@ module.exports = {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["leave", "exit", "quit", "dc", "stop", "dis", "diss", "st"],
+  aliases: ["leave", "dc", "stop", "dis", "diss", "st"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client

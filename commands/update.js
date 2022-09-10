@@ -18,9 +18,10 @@ module.exports = {
    */
   run: async (client, message, args, { GuildDB }) => {
     let embed = new MessageEmbed()
-      .setAuthor(`Описание последнего обновления - 3.1`, client.botconfig.IconURL)
+      .setAuthor(`Описание последнего обновления - 3.3`, client.botconfig.IconURL)
       .setColor("#77acb8")
-      .setDescription(`1. Небольшие изменения в коде.`
+      .setDescription(`1. Изменён bassboost.
+      2. Изменены псевдонимы команды disconnect.`
       );
     message.channel.send(embed);
   },
@@ -34,9 +35,10 @@ module.exports = {
      */
     run: async (client, interaction, args, { GuildDB }) => {
       let embed = new MessageEmbed()
-      .setAuthor(`Описание последнего обновления - 3.1`, client.botconfig.IconURL)
+      .setAuthor(`Описание последнего обновления - 3.3`, client.botconfig.IconURL)
       .setColor("#77acb8")
-      .setDescription(`1. Небольшие изменения в коде.`
+      .setDescription(`1. Изменён bassboost.
+      2. Изменены псевдонимы команды disconnect.`
         );
         interaction.send(embed);
     },
